@@ -113,7 +113,8 @@ def predict_match(request):
             prediction_lines = prediction_text.split('\n')
             prediction = {
                 'prediction': prediction_lines[0].replace("Prediction: ", ""),
-                'reason': prediction_lines[1].replace("Reason: ", "") if len(prediction_lines) > 1 else ""
+                'reason': prediction_lines[1].replace("Reason: ", "") if len(prediction_lines) > 1 else "",
+                'prompt': prompt,
             }
 
             return JsonResponse(prediction)

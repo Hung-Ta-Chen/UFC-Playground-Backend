@@ -14,13 +14,13 @@ def fetch_fighter_details(url):
         'division': 'N/A',
         'style': 'N/A',
         'wins': '0',
-        'wins_by_knockout': '0',
-        'wins_by_submission': '0',
-        'wins_by_decision': '0',
+        'wins_by_knockout': 'N/A',
+        'wins_by_submission': 'N/A',
+        'wins_by_decision': 'N/A',
         'losses': '0',
-        'losses_by_knockout': '0',
-        'losses_by_submission': '0',
-        'losses_by_decision': '0',
+        'losses_by_knockout': 'N/A',
+        'losses_by_submission': 'N/A',
+        'losses_by_decision': 'N/A',
     }
 
     if infobox:
