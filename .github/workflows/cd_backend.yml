@@ -23,8 +23,8 @@ jobs:
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
-        password: ${{ secrets.EC2_KEY }}
-        port: ${{ secrets.EC2_PORT }}
+        key: ${{ secrets.EC2_KEY }}
+        port: 22
         script: |
           cd UFC-Playground-Backend
           git pull origin main
