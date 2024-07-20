@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class Fighter(models.Model):
     name = models.CharField(max_length=200)
+    intro = models.CharField(max_length=1500, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True, default=0)
     height = models.CharField(max_length=100, null=True, blank=True)
     reach = models.CharField(max_length=100, null=True, blank=True)

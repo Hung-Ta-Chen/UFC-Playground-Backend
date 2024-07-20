@@ -21,10 +21,14 @@ def fetch_fighter_details(url):
         'losses_by_knockout': 'N/A',
         'losses_by_submission': 'N/A',
         'losses_by_decision': 'N/A',
+        'intro': 'N/A',
     }
 
     if infobox:
         rows = infobox.find_all('tr')
+        mma_record_section = False
+        wins_section = False
+        losses_section = False
         for row in rows:
             header = row.find('th')
             data = row.find('td')
@@ -40,22 +44,43 @@ def fetch_fighter_details(url):
                     details['division'] = value
                 elif 'style' in key:
                     details['style'] = value
-                elif 'wins' in key and 'by knockout' not in key and 'by submission' not in key and 'by decision' not in key:
-                    details['wins'] = value
-                elif 'knockout' in key and details['wins_by_knockout'] == 'N/A':
-                    details['wins_by_knockout'] = value
-                elif 'submission' in key and details['wins_by_submission'] == 'N/A':
-                    details['wins_by_submission'] = value
-                elif 'decision' in key and details['wins_by_decision'] == 'N/A':
-                    details['wins_by_decision'] = value
-                elif 'losses' in key and 'by knockout' not in key and 'by submission' not in key and 'by decision' not in key:
-                    details['losses'] = value
-                elif 'knockout' in key and details['wins_by_knockout'] != 'N/A':
-                    details['losses_by_knockout'] = value
-                elif 'submission' in key and details['wins_by_submission'] != 'N/A':
-                    details['losses_by_submission'] = value
-                elif 'decision' in key and details['wins_by_decision'] != 'N/A':
-                    details['losses_by_decision'] = value
+            if header and 'mixed martial arts record' in header.text.strip().lower():
+                mma_record_section = True
+                continue
+            if mma_record_section:
+                if header:
+                    key = header.text.strip().lower()
+                    if not data:
+                        continue      
+                    value = data.text.strip()
+
+                    if 'total' in key:
+                        continue
+                    elif 'wins' in key and 'knockout' not in key and 'submission' not in key and 'decision' not in key:
+                        details['wins'] = value
+                        wins_section = True
+                    elif 'knockout' in key and wins_section:
+                        details['wins_by_knockout'] = value
+                    elif 'submission' in key and wins_section:
+                        details['wins_by_submission'] = value
+                    elif 'decision' in key and wins_section:
+                        details['wins_by_decision'] = value
+                    elif 'losses' in key and 'knockout' not in key and 'submission' not in key and 'decision' not in key:
+                        details['losses'] = value
+                        wins_section = False
+                        losses_section = True
+                    elif 'knockout' in key and not wins_section and losses_section:
+                        details['losses_by_knockout'] = value
+                    elif 'submission' in key and not wins_section and losses_section:
+                        details['losses_by_submission'] = value
+                    elif 'decision' in key and not wins_section and losses_section:
+                        details['losses_by_decision'] = value
+
+    # Extract the intro paragraph
+    if infobox:
+        intro_paragraph = infobox.find_next('p')
+        if intro_paragraph:
+            details['intro'] = intro_paragraph.text.strip()
 
     return details
 

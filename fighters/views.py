@@ -13,6 +13,7 @@ def fighter_list(request):
     fighter_data = [{
         'id': fighter.id,
         'name': fighter.name,
+        'intro': fighter.intro,
         'age': fighter.age,
         'height': fighter.height,
         'reach': fighter.reach,
@@ -34,6 +35,7 @@ def fighter_detail(request, fighter_id):
         fighter = Fighter.objects.get(pk=fighter_id)
         fighter_data = {
             'name': fighter.name,
+            'intro': fighter.intro,
             'age': fighter.age,
             'height': fighter.height,
             'reach': fighter.reach,
@@ -67,6 +69,7 @@ def predict_match(request):
                 f"Assume there are two UFC fighters with the following stats:\n\n"
                 f"Fighter 1:\n"
                 f"- Name: {fighter1.name}"
+                f"- Intro: {fighter1.intro}"
                 f"- Age: {fighter1.age}\n"
                 f"- Height: {fighter1.height}\n"
                 f"- Reach: {fighter1.reach}\n"
@@ -82,6 +85,7 @@ def predict_match(request):
                 f"- Losses by Decision: {fighter1.losses_by_decision}\n\n"
                 f"Fighter 2:\n"
                 f"- Name: {fighter2.name}"
+                f"- Intro: {fighter2.intro}"
                 f"- Age: {fighter2.age}\n"
                 f"- Height: {fighter2.height}\n"
                 f"- Reach: {fighter2.reach}\n"
