@@ -95,7 +95,7 @@ def predict_match(request):
                 f"- Losses by Knockout: {fighter2.losses_by_knockout}\n"
                 f"- Losses by Submission: {fighter2.losses_by_submission}\n"
                 f"- Losses by Decision: {fighter2.losses_by_decision}\n\n"
-                f"Based on these stats, who is more likely to win the match in reality (Weight class is a huge factor)? Please provide your prediction in the following format:\n"
+                f"Based on these stats, who is more likely to win the match in reality? Please provide your prediction in the following format:\n"
                 f"Prediction: [Winner's name]\n"
                 f"Reason: [Provide a brief reason for the prediction in one sentence. This field cannot be blank.]\n"
                 f"Make sure the reason is informative and relevant to the fighters' stats."
