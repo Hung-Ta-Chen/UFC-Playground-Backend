@@ -1,0 +1,25 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Django specific
+db.sqlite3
+media/
+ufc_playground/settings.py
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Static and compiled files
+staticfiles/
+*.log
