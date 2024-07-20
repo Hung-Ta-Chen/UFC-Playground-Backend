@@ -128,6 +128,7 @@ class Command(BaseCommand):
                         # Combine the fighter data
                         fighter_data = {
                             'name': name,
+                            'intro': fighter_details.get('intro'),
                             'age': age,
                             'height': height,
                             'reach': fighter_details.get('reach', 'N/A'),
@@ -143,6 +144,7 @@ class Command(BaseCommand):
                             'losses_by_decision': safe_int(fighter_details.get('losses_by_decision', '0')),
                         }
 
+                        #print(fighter_data)
                         Fighter.objects.update_or_create(
                             name=name,
                             defaults=fighter_data,
