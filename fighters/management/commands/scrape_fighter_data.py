@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from fighters.models import Fighter
+from security import safe_requests
 
 def fetch_fighter_details(url):
-    response = requests.get(url)
+    response = safe_requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     infobox = soup.find('table', class_='infobox')
 
