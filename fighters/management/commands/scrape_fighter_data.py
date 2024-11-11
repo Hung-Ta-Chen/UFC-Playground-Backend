@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from fighters.models import Fighter
 
 def fetch_fighter_details(url):
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     soup = BeautifulSoup(response.content, 'html.parser')
     infobox = soup.find('table', class_='infobox')
 
@@ -89,7 +89,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         url = 'https://en.wikipedia.org/wiki/List_of_current_UFC_fighters'
-        response = requests.get(url)
+        response = requests.get(url, timeout=60)
         soup = BeautifulSoup(response.content, 'html.parser')
 
          # Find the "Debuted fighters" section
